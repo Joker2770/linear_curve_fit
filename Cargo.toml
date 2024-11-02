@@ -1,0 +1,13 @@
+[package]
+name = "linear_curve_fit"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-2.0-or-later"
+description = "A no_std and no heap memory library for linear curve coefficents calculation."
+homepage = "https://github.com/Joker2770/linear_curve_fit"
+repository = "https://github.com/Joker2770/linear_curve_fit"
+authors = ["Joker2770"]
+keywords = ["linear", "linear-regression", "curve-fitting"]
+
+[dependencies]
+nalgebra = { version = "0.33.2", default-features = false, features = ["libm"] }
