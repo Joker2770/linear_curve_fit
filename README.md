@@ -17,7 +17,7 @@ A `no_std` and no heap memory library for linear curve coefficents calculation.
 
     assert!(linear_coefficents.coefficents().0 < -9.5f32);
     assert!(linear_coefficents.coefficents().1 > 4.5f32);
-    assert!((linear_coefficents.value(5.0)  + 45.2f32).abs() < 1.0f32);
-    assert!((linear_coefficents.value(10.3)  + 98.1f32).abs() < 1.0f32);
+    assert!((linear_coefficents.value(5.0) + 45.2f32).abs() < 1.0f32);
+    assert!((linear_coefficents.value(10.3) + 98.1f32).abs() < 1.0f32);
 
 ```
