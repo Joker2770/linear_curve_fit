@@ -30,10 +30,12 @@ pub mod linear_curve {
     }
 
     impl LinearCoefficents2D {
+        /// $$f(x) & = kx + b$$
         pub fn value(&self, x: f32) -> f32 {
             self.k * x + self.b
         }
 
+        /// Return function ceofficents `k` and `b`.
         pub fn coefficents(&self) -> (f32, f32) {
             (self.k, self.b)
         }
