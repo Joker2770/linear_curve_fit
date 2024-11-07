@@ -91,7 +91,7 @@ pub mod linear_curve {
     }
 
     impl LinearCoefficents3D {
-        /// $$f(x) & = ax + by + c$$
+        /// $$f(x, y) & = ax + by + c$$
         pub fn value(&self, x: f32, y: f32) -> f32 {
             self.a * x + self.b * y + self.c
         }
