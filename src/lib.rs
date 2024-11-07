@@ -39,8 +39,9 @@ mod tests {
             LinearCoefficents2D::get_matrix_data_from_8_points(&x_test_arr, &y_test_arr);
         linear_coefficents.get_coefficients_from_8_matrix_data(&xm_data, &ym_data, 0.0001f32);
 
-        assert!(linear_coefficents.coefficents().0 < -9.5f32);
-        assert!(linear_coefficents.coefficents().1 > 4.5f32);
+        let (k, b) = linear_coefficents.coefficents();
+        assert!(k < -9.5f32 && k > -10.5f32);
+        assert!(b > 4.5f32 && b < 5.5f32);
         assert!((linear_coefficents.value(5.0) + 45.2f32).abs() < 1.0f32);
         assert!((linear_coefficents.value(10.3) + 98.1f32).abs() < 1.0f32);
     }
