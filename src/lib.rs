@@ -20,9 +20,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 pub mod linear_curve_fit;
 
+pub use linear_curve_fit::linear_curve;
+
 #[cfg(test)]
 mod tests {
-    use linear_curve_fit::linear_curve::LinearCoefficents2D;
+    use linear_curve::LinearCoefficents2D;
 
     use super::*;
 
