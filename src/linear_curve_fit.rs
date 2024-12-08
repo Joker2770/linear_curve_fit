@@ -34,7 +34,7 @@ pub mod linear_curve {
     }
 
     impl LinearCoefficents2D {
-        /// $$f(x) & = kx + b$$
+        /// $$f(x) = kx + b$$
         pub fn value(&self, x: f32) -> f32 {
             self.k * x + self.b
         }
@@ -102,7 +102,7 @@ pub mod linear_curve {
     }
 
     impl LinearCoefficents3D {
-        /// $$f(x, y) & = ax + by + c$$
+        /// $$f(x, y) = ax + by + c$$
         pub fn value(&self, x: f32, y: f32) -> f32 {
             self.a * x + self.b * y + self.c
         }
