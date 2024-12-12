@@ -2,7 +2,7 @@
 
 [![Rust](https://github.com/Joker2770/linear_curve_fit/actions/workflows/rust.yml/badge.svg)](https://github.com/Joker2770/linear_curve_fit/actions/workflows/rust.yml)
 
-A `no_std` and no heap memory library for linear curve coefficents calculation.
+A `no_std` and no `alloc` library for linear curve coefficents calculation.
 
 ## example
 
