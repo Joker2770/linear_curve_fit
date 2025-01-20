@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #![allow(unused_imports)]
 
 pub mod linear_curve {
-
+    use anyhow::Result;
     use nalgebra::{ComplexField, SMatrix};
     const POINT_NUM_2D: usize = 8;
     const POINT_NUM_3D: usize = 8;
@@ -65,7 +65,7 @@ pub mod linear_curve {
             a: &[f32; POINT_NUM_2D * MATRIX_COLUMNS_2D],
             b: &[f32; POINT_NUM_2D],
             eps: f32,
-        ) -> Self {
+        ) -> Result<Self, anyhow::Error> {
             if a.len() == 2 * b.len() {
                 type MatrixXx1f32 = SMatrix<f32, POINT_NUM_2D, 1>;
                 type MatrixXx2f32 = SMatrix<f32, POINT_NUM_2D, MATRIX_COLUMNS_2D>;
@@ -75,22 +75,27 @@ pub mod linear_curve {
                 let decomp = ma.svd(true, true);
 
                 let x = decomp.solve(&mb, eps);
-                if let Ok(r) = x {
-                    self.b = r[0];
-                    self.k = r[1];
-                } else {
-                    self.b = 0.0f32;
-                    self.k = 0.0f32;
+                match x {
+                    Ok(r) => {
+                        self.b = r[0];
+                        self.k = r[1];
+                    }
+                    Err(_) => {
+                        self.b = 0.0f32;
+                        self.k = 0.0f32;
+                        return Err(anyhow::anyhow!("SVD solve failed"));
+                    }
                 }
             } else {
                 self.b = 0.0f32;
                 self.k = 0.0f32;
+                return Err(anyhow::anyhow!("Matrix size not match"));
             }
 
-            Self {
+            Ok(Self {
                 b: self.b,
                 k: self.k,
-            }
+            })
         }
     }
 
@@ -135,7 +140,7 @@ pub mod linear_curve {
             a: &[f32; POINT_NUM_3D * MATRIX_COLUMNS_3D],
             b: &[f32; POINT_NUM_3D],
             eps: f32,
-        ) -> Self {
+        ) -> Result<Self, anyhow::Error> {
             if a.len() == MATRIX_COLUMNS_3D * b.len() {
                 type MatrixXx1f32 = SMatrix<f32, POINT_NUM_3D, 1>;
                 type MatrixXx3f32 = SMatrix<f32, POINT_NUM_3D, MATRIX_COLUMNS_3D>;
@@ -145,26 +150,31 @@ pub mod linear_curve {
                 let decomp = ma.svd(true, true);
 
                 let x = decomp.solve(&mb, eps);
-                if let Ok(r) = x {
-                    self.c = r[0];
-                    self.a = r[1];
-                    self.b = r[2];
-                } else {
-                    self.c = 0.0f32;
-                    self.a = 0.0f32;
-                    self.b = 0.0f32;
+                match x {
+                    Ok(r) => {
+                        self.c = r[0];
+                        self.a = r[1];
+                        self.b = r[2];
+                    }
+                    Err(_) => {
+                        self.c = 0.0f32;
+                        self.a = 0.0f32;
+                        self.b = 0.0f32;
+                        return Err(anyhow::anyhow!("SVD solve failed"));
+                    }
                 }
             } else {
                 self.c = 0.0f32;
                 self.a = 0.0f32;
                 self.b = 0.0f32;
+                return Err(anyhow::anyhow!("Matrix size not match"));
             }
 
-            Self {
+            Ok(Self {
                 a: self.a,
                 b: self.b,
                 c: self.c,
-            }
+            })
         }
     }
 }
