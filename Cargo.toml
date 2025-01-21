@@ -1,6 +1,6 @@
 [package]
 name = "linear_curve_fit"
-version = "0.2.3"
+version = "0.3.0"
 edition = "2021"
 license = "GPL-2.0-or-later"
 description = "A `no_std` and no `alloc` library for linear curve coefficents calculation."
