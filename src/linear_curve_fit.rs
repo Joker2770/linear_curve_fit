@@ -1,6 +1,6 @@
 /*
 A `no_std` and no `alloc` library for linear curve coefficents calculation.
-Copyright (C) 2024  joker2770
+Copyright (C) 2024-2025 joker2770
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

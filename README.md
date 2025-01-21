@@ -18,7 +18,7 @@ A `no_std` and no `alloc` library for linear curve coefficents calculation.
     ];
     let (xm_data, ym_data) =
         LinearCoefficents2D::get_matrix_data_from_8_points(&x_test_arr, &y_test_arr);
-    linear_coefficents.get_coefficients_from_8_matrix_data(&xm_data, &ym_data, 0.0001f32);
+    let _ = linear_coefficents.get_coefficients_from_8_matrix_data(&xm_data, &ym_data, 0.0001f32);
 
     let (k, b) = linear_coefficents.coefficents();
     assert!(k < -9.5f32 && k > -10.5f32);
