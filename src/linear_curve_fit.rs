@@ -65,7 +65,7 @@ pub mod linear_curve {
             a: &[f32; POINT_NUM_2D * MATRIX_COLUMNS_2D],
             b: &[f32; POINT_NUM_2D],
             eps: f32,
-        ) -> Result<Self, anyhow::Error> {
+        ) -> Result<Self> {
             if a.len() == 2 * b.len() {
                 type MatrixXx1f32 = SMatrix<f32, POINT_NUM_2D, 1>;
                 type MatrixXx2f32 = SMatrix<f32, POINT_NUM_2D, MATRIX_COLUMNS_2D>;
@@ -140,7 +140,7 @@ pub mod linear_curve {
             a: &[f32; POINT_NUM_3D * MATRIX_COLUMNS_3D],
             b: &[f32; POINT_NUM_3D],
             eps: f32,
-        ) -> Result<Self, anyhow::Error> {
+        ) -> Result<Self> {
             if a.len() == MATRIX_COLUMNS_3D * b.len() {
                 type MatrixXx1f32 = SMatrix<f32, POINT_NUM_3D, 1>;
                 type MatrixXx3f32 = SMatrix<f32, POINT_NUM_3D, MATRIX_COLUMNS_3D>;
