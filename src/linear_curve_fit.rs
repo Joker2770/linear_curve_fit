@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #![allow(unused_imports)]
 
 pub mod linear_curve {
-    use anyhow::Result;
+    use crate::error::CustomError;
     use nalgebra::{ComplexField, SMatrix};
     const POINT_NUM_2D: usize = 8;
     const POINT_NUM_3D: usize = 8;
@@ -65,7 +65,7 @@ pub mod linear_curve {
             a: &[f32; POINT_NUM_2D * MATRIX_COLUMNS_2D],
             b: &[f32; POINT_NUM_2D],
             eps: f32,
-        ) -> Result<Self> {
+        ) -> Result<Self, CustomError> {
             if a.len() == 2 * b.len() {
                 type MatrixXx1f32 = SMatrix<f32, POINT_NUM_2D, 1>;
                 type MatrixXx2f32 = SMatrix<f32, POINT_NUM_2D, MATRIX_COLUMNS_2D>;
@@ -83,13 +83,13 @@ pub mod linear_curve {
                     Err(_) => {
                         self.b = 0.0f32;
                         self.k = 0.0f32;
-                        return Err(anyhow::anyhow!("SVD solve failed"));
+                        return Err(CustomError::SvdFailed);
                     }
                 }
             } else {
                 self.b = 0.0f32;
                 self.k = 0.0f32;
-                return Err(anyhow::anyhow!("Matrix size not match"));
+                return Err(CustomError::MatrixSizeNotMatch);
             }
 
             Ok(Self {
@@ -140,7 +140,7 @@ pub mod linear_curve {
             a: &[f32; POINT_NUM_3D * MATRIX_COLUMNS_3D],
             b: &[f32; POINT_NUM_3D],
             eps: f32,
-        ) -> Result<Self> {
+        ) -> Result<Self, CustomError> {
             if a.len() == MATRIX_COLUMNS_3D * b.len() {
                 type MatrixXx1f32 = SMatrix<f32, POINT_NUM_3D, 1>;
                 type MatrixXx3f32 = SMatrix<f32, POINT_NUM_3D, MATRIX_COLUMNS_3D>;
@@ -160,14 +160,14 @@ pub mod linear_curve {
                         self.c = 0.0f32;
                         self.a = 0.0f32;
                         self.b = 0.0f32;
-                        return Err(anyhow::anyhow!("SVD solve failed"));
+                        return Err(CustomError::SvdFailed);
                     }
                 }
             } else {
                 self.c = 0.0f32;
                 self.a = 0.0f32;
                 self.b = 0.0f32;
-                return Err(anyhow::anyhow!("Matrix size not match"));
+                return Err(CustomError::MatrixSizeNotMatch);
             }
 
             Ok(Self {

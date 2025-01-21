@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #![no_std]
 
+pub mod error;
 pub mod linear_curve_fit;
 
 pub use linear_curve_fit::linear_curve;
@@ -39,7 +40,8 @@ mod tests {
         ];
         let (xm_data, ym_data) =
             LinearCoefficents2D::get_matrix_data_from_8_points(&x_test_arr, &y_test_arr);
-        let _ = linear_coefficents.get_coefficients_from_8_matrix_data(&xm_data, &ym_data, 0.0001f32);
+        let _ =
+            linear_coefficents.get_coefficients_from_8_matrix_data(&xm_data, &ym_data, 0.0001f32);
 
         let (k, b) = linear_coefficents.coefficents();
         assert!(k < -9.5f32 && k > -10.5f32);
